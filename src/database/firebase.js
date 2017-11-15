@@ -1,12 +1,12 @@
 import firebase from 'firebase';
 
 var config = {
-	apiKey: "AIzaSyBHjtWxuYK6WwjmguvIEd6wpSS3UlMw55s",
-	authDomain: "budget-helper-7d737.firebaseapp.com",
-	databaseURL: "https://budget-helper-7d737.firebaseio.com",
-	projectId: "budget-helper-7d737",
-	storageBucket: "budget-helper-7d737.appspot.com",
-	messagingSenderId: "508676884787"
+	apiKey: "AIzaSyDTxQF6E8AFTpFc4biwCY6bnf55L1lVsJs",
+	authDomain: "jobhunt-helper.firebaseapp.com",
+	databaseURL: "https://jobhunt-helper.firebaseio.com",
+	projectId: "jobhunt-helper",
+	storageBucket: "",
+	messagingSenderId: "757577170005"
 };
 firebase.initializeApp(config);
 

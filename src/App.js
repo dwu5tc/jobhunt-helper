@@ -14,16 +14,17 @@ class App extends Component {
 			user: null
 		};
 
-		this.userLogin = this.userLogin.bind(this);
-		this.userLogout = this.userLogout.bind(this);
+		// this.userLogin = this.userLogin.bind(this);
+		// this.userLogout = this.userLogout.bind(this);
 	}
 
-	userLogin() {
+	userLogin = () => {
 		auth.signInWithPopup(provider)
 			.then(function(res) {
 				const user = res.user;
+				console.log(res);
 				this.setState({
-					user
+					
 				});
 				alert('logged in');
 			})
@@ -33,7 +34,7 @@ class App extends Component {
 			});
 	}
 
-	userLogout() {
+	userLogout = () => {
 		auth.signOut()
 			.then(function() {
 				this.setState({
