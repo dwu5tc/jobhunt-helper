@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 const Login = ({ handleLogin }) => {
 	return (
 		<div className="login">
-			<p>hello from login</p>
+			<h1>Job Hunt Tracker</h1>
+			<p>Please Login</p>
 			<button className="login-button" onClick={handleLogin}>Login</button>
 		</div>
 	);

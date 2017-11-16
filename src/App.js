@@ -11,24 +11,17 @@ class App extends Component {
 		super();
 
 		this.state = {
-			user: null
+			uid: null,
+			name: null
 		};
-
-		// this.userLogin = this.userLogin.bind(this);
-		// this.userLogout = this.userLogout.bind(this);
 	}
 
 	userLogin = () => {
 		auth.signInWithPopup(provider)
-			.then(function(res) {
-				const user = res.user;
-				console.log(res);
-				this.setState({
-					
-				});
-				alert('logged in');
+			.then((res) => {
+				// can i just delete this???
 			})
-			.catch(function(err) {
+			.catch((err) => {
 				// handle error
 				console.log(err);
 			});
@@ -36,24 +29,25 @@ class App extends Component {
 
 	userLogout = () => {
 		auth.signOut()
-			.then(function() {
+			.then(() => {
 				this.setState({
-					user: null
+					uid: null,
+					name: null
 				});
-				alert('logged out');
-			})
-			.catch(function(error) {
+			 })
+			.catch((err) => {
 				// error handling
+				console.log(err);
 			});
 	}
 
 	render() {
 		return (
 			<div className="App">
-				{(this.state.user)
+				{(this.state.uid)
 					?
 					<Home 
-						user={this.state.user}
+						{...this.state}
 						handleLogout={this.userLogout} 
 					/>
 					:
@@ -63,6 +57,29 @@ class App extends Component {
 				}
 			</div>
 		);
+	}
+
+	componentDidMount() {
+		auth.onAuthStateChanged((user) => {
+			if (user) {
+				const uid = user.uid;
+				const name = user.displayName;
+				const userRef = db.ref('users/' + uid);
+				userRef.once('value').then((snapshot) => {
+					const userExists = snapshot.exists(); 
+					if (!userExists) { 
+						userRef.set({
+							uid: user.uid,
+							name: user.displayName,
+						});
+					}
+					this.setState({
+						uid,
+						name
+					});
+				});
+			}
+		});
 	}
 }
 
