@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Filter from './Filter';
+import FiltersContainer from '../containers/FiltersContainer';
 import JobsContainer from '../containers/JobContainer';
 import NewJobContainer from '../containers/NewJobContainer';
 import Footer from './Footer';
@@ -14,7 +14,7 @@ export default class Home extends Component {
 
 		this.state = {
 			isCreatingNewJob: true,
-			filter: 'all',
+			filters: ['applied', 'ongoing', 'yellow rejections', 'red rejections'],
 			jobs: [
 				{
 					title: 'fe dev',
@@ -64,10 +64,30 @@ export default class Home extends Component {
 		};
 	}
 
-	changeFilter = (filter) =>{
-		this.setState({
-			filter
-		});
+	setFilters = (clickedFilter) => {
+		switch(clickedFilter) {
+			case 'all': 
+				this.setState({
+					filters: ['applied', 'ongoing', 'yellow rejections', 'red rejections']
+				});
+				break;
+			case 'none':
+				this.setState({
+					filters: []
+				});
+				break;
+			default: 
+				this.setState((prevState) => {
+					if (prevState.filters.indexOf(clickedFilter) !== -1) {
+						return ({
+							filters: prevState.filters.filter(filter => filter !== clickedFilter)
+						});
+					}
+					return ({
+						filters: prevState.filters.concat(clickedFilter)
+					});
+				});
+		}
 	}
 
 	render() {
@@ -80,36 +100,41 @@ export default class Home extends Component {
 					>Logout
 					</button>
 				</div>
-				<Filter
-					handleFilterClick={this.changeFilter}
+				<FiltersContainer
+					filters={this.state.filters}
+					handleFilterClick={this.setFilters}
 				/>
-				<JobsContainer
-					uid={this.props.uid}
+				{/*<JobsContainer
 					{...this.state}
+					uid={this.props.uid}
 				/>
 				{this.state.isCreatingNewJob && 
 					<NewJobContainer 
 						uid={this.props.uid}
 					/>
-				}
+				}*/}
+				<Footer
+					jobs={this.state.jobs}
+					filters={this.state.filters}
+				/>
 			</div>
 		);
 	}
 
-	componentDidMount() {
-		const userRef = db.ref('users/' + this.props.uid);
-		userRef.on('value', (snapshot) => {
-			const jobs = snapshot.val();
-			this.setState({
-				jobs
-			});
-		});
-	}
+	// componentDidMount() {
+	// 	const userRef = db.ref('users/' + this.props.uid);
+	// 	userRef.on('value', (snapshot) => {
+	// 		const jobs = snapshot.val();
+	// 		this.setState({
+	// 			jobs
+	// 		});
+	// 	});
+	// }
 }
 
 // could do this with es7 property initializers...
 Home.propTypes = {
 	uid: PropTypes.string.isRequired,
-	name: PropTypes.func.isRequired,
+	name: PropTypes.string.isRequired,
 	handleLogout: PropTypes.func.isRequired
-}
+};

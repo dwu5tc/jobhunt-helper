@@ -2,65 +2,41 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Filter from '../components/Filter';
+import Filters from '../components/Filters';
 
 export default class FiltersContainer extends Component { 
-	constructer(props) {
-		super(props)
+	constructor(props) {
+		super(props);
 
 		this.state = {
 			filtersHidden: true,
-		}
+		};
 	}
 
-	filterClick = (filter) => {
-		this.props.handleFilterClick(filter);
-	}
-
-	renderFilters = () => {
-		let filters;
-		if (this.props.filter == )
-	}
-	
 	toggleVisibility = () => {
 		this.setState((prevState) => {
-			filtersHidden: !prevState.filtersHidden
+			return {
+				filtersHidden: !prevState.filtersHidden
+			}
 		});
 	}
 
-	render() {
-		const { 
-			filter,
-			handleFilterClick 
-		} = this.props;
+	// filterClick = (filter) => {
+	// 	this.props.handleFilterClick(filter);
+	// }
 
+	render() {
+		console.log(this.toggleVisibility);
 		return (
-			<div className="filter">
-				<button 
-					onClick={this.toggleVisibility}
-				>
-					{(this.filtersHidden) 
-						? 
-						'Filters Show'
-						:
-						'Filters Hide'
-					}
-				</button>
-				<div className="filter__filters">
-					<Filter 
-						filter={filter}
-						onClick={this.handleFilterClick}
-					/>
-					<Filter 
-						filter={filter}
-						onClick={this.handleFilterClick}
-					/>
-					<Filter 
-						filter{filter}
-						onClick={this.handleFilterClick}
-					/>
-				</div>
-			</div>
+			<Filters 
+				{...this.props}
+				isHidden={this.state.filtersHidden}
+				handleToggleFilterVisibility={this.toggleVisibility}
+			/>
 		);
 	}
+}
+
+FiltersContainer.propTypes = {
+	handleFilterClick: PropTypes.func.isRequired
 };

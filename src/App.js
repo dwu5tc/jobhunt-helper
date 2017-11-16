@@ -1,7 +1,7 @@
 // jshint esversion: 6
 
 import React, { Component } from 'react';
-// import './App.css';
+import './App.css';
 import Login from './components/Login.js';
 import Home from './components/Home.js';
 import { db, auth, provider } from './database/firebase';
