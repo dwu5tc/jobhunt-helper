@@ -40,7 +40,6 @@ export default class JobContainer extends Component {
 	}
 
 	render() {
-		console.log(this.props.job);
 		return (
 			<div>
 				{(this.isEditing)

@@ -14,7 +14,7 @@ export default class Home extends Component {
 
 		this.state = {
 			isCreatingNewJob: true,
-			filters: ['applied', 'ongoing', 'yellow rejections', 'red rejections'],
+			filters: ['applied', 'ongoing', 'yellow rejection', 'red rejection'],
 			jobs: [
 				{
 					title: 'fe dev',
@@ -67,7 +67,7 @@ export default class Home extends Component {
 					contactEmail: 'googledude@googlio.com',
 					contactPosition: 'idk',
 					comments: 'taking over the world',
-					appState: '',
+					appState: 'yellow rejection',
 					interviews: [
 					{
 						date: 'nov 4, 2017',
@@ -88,7 +88,7 @@ export default class Home extends Component {
 					contactEmail: 'no email here',
 					contactPosition: 'contact position???',
 					comments: 'comments herejslgkasdglkslfkjslfklaksjl',
-					appState: '',
+					appState: 'red rejection',
 					interviews: [
 					{
 						date: 'nov 4, 2017',
@@ -108,7 +108,7 @@ export default class Home extends Component {
 		switch(clickedFilter) {
 			case 'all': 
 				this.setState({
-					filters: ['applied', 'ongoing', 'yellow rejections', 'red rejections']
+					filters: ['applied', 'ongoing', 'yellow rejection', 'red rejection']
 				});
 				break;
 			case 'none':
@@ -155,11 +155,11 @@ export default class Home extends Component {
 					filters={filters}
 					jobs={jobs}
 				/>
-				{/*{isCreatingNewJob && 
+				{isCreatingNewJob && 
 					<NewJobContainer 
 						uid={this.props.uid}
 					/>
-				}*/}
+				}
 				<Footer
 					jobs={jobs}
 					filters={filters}

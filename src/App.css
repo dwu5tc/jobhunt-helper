@@ -43,3 +43,53 @@
 .selected {
 	border: 1px solid red;
 }
+
+.contact {
+	position: relative;
+}
+
+.contact-details {
+	position: absolute;
+	display: none;
+}
+
+.contact:hover .contact-details {
+	display: block;
+	background-color: orange;
+}
+
+.applied {
+	border: 1px dashed black;
+}
+
+.ongoing {
+	background-color: green;
+}
+
+.yellow-rejection {
+	background-color: yellow;
+}
+
+.red-rejection {
+	background-color: red;
+}
+
+footer {
+	background: white;
+	position: fixed;
+	bottom: 0;
+}
+
+.job {
+	display: flex;
+	flex-direction: column;
+}
+
+.job-summary__content {
+	display: flex;
+}
+
+.job-summary__content > * {
+	margin: 5px;
+	border: 1px solid black;
+}

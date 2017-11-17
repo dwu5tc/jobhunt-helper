@@ -43,14 +43,14 @@ const Filters = (props) => {
 					Ongoing
 				</button>
 				<button 
-					className={filters.indexOf('yellow rejections') !== -1 ? 'selected' : ''}
-					onClick={() => handleFilterClick('yellow rejections')}
+					className={filters.indexOf('yellow rejection') !== -1 ? 'selected' : ''}
+					onClick={() => handleFilterClick('yellow rejection')}
 				>
 					Yellow Rejections
 				</button>
 				<button 
-					className={filters.indexOf('red rejections') !== -1 ? 'selected' : ''}
-					onClick={() => handleFilterClick('red rejections')}
+					className={filters.indexOf('red rejection') !== -1 ? 'selected' : ''}
+					onClick={() => handleFilterClick('red rejection')}
 				>
 					Red Rejections
 				</button>
