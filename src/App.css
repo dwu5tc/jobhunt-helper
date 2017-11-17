@@ -35,7 +35,8 @@
 	display: none;
 }
 
-.show {
+.visible {
+	background-color: grey;
 	display: block;
 }
 

@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// clean up the button rendering and the onclick functions...
 const Filters = (props) => {
 	const { 
 		filters,
@@ -21,7 +22,7 @@ const Filters = (props) => {
 			</button>
 			<ul className={isHidden 
 				? 'filters__filters hidden'
-				: 'filters__filters show'
+				: 'filters__filters visible'
 			}>
 				<button 
 					className={filters.length === 4 ? 'selected' : ''}

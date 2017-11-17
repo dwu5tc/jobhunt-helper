@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FiltersContainer from '../containers/FiltersContainer';
-import JobsContainer from '../containers/JobContainer';
+import JobsContainer from '../containers/JobsContainer';
 import NewJobContainer from '../containers/NewJobContainer';
 import Footer from './Footer';
 import { db } from '../database/firebase';
@@ -21,11 +21,21 @@ export default class Home extends Component {
 					company: 'spaceX',
 					link: 'https://www.instagram.com/dwu5tc',
 					dateApplied: new Date(),
-					contact: 'elon musk',
+					contact: 'elon musk', // should i used an object for contact???
 					contactEmail: 'elon.musk@spacex.com',
 					contactPosition: 'ceo yo',
 					comments: 'cool company',
 					appState: 'applied',
+					interviews: [ // cant i just use date as key, notes as value???
+					{
+						date: 'nov 4, 2017',
+						notes: 'went well'
+					}, 
+					{
+						date: 'nov 10, 2017',
+						notes: 'failed so hard'
+					}
+					]
 				},
 				{
 					title: 'fs dev',
@@ -37,6 +47,16 @@ export default class Home extends Component {
 					contactPosition: 'ceo yo',
 					comments: 'just for memes',
 					appState: 'ongoing',
+					interviews: [
+					{
+						date: 'nov 4, 2017',
+						notes: 'went well'
+					}, 
+					{
+						date: 'nov 10, 2017',
+						notes: 'failed so hard'
+					}
+					]
 				},
 				{
 					title: 'be dev',
@@ -48,6 +68,16 @@ export default class Home extends Component {
 					contactPosition: 'idk',
 					comments: 'taking over the world',
 					appState: '',
+					interviews: [
+					{
+						date: 'nov 4, 2017',
+						notes: 'went well'
+					}, 
+					{
+						date: 'nov 10, 2017',
+						notes: 'failed so hard'
+					}
+					]
 				},
 				{
 					title: 'FE DEV',
@@ -59,6 +89,16 @@ export default class Home extends Component {
 					contactPosition: 'contact position???',
 					comments: 'comments herejslgkasdglkslfkjslfklaksjl',
 					appState: '',
+					interviews: [
+					{
+						date: 'nov 4, 2017',
+						notes: 'went well'
+					}, 
+					{
+						date: 'nov 10, 2017',
+						notes: 'failed so hard'
+					}
+					]
 				}
 			]
 		};
@@ -91,31 +131,38 @@ export default class Home extends Component {
 	}
 
 	render() {
+		const {
+			isCreatingNewJob,
+			filters,
+			jobs
+		} = this.state;
+
 		return (
-			<div className="home">
-				<div className="top-bar">
+			<div className='home'>
+				<header>
 					<h1>Job Hunt Tracker</h1>
-					<button className="logout-button" 
+					<button className='logout-button' 
 						onClick={this.props.handleLogout}
 					>Logout
 					</button>
-				</div>
+				</header>
 				<FiltersContainer
-					filters={this.state.filters}
+					filters={filters}
 					handleFilterClick={this.setFilters}
 				/>
-				{/*<JobsContainer
-					{...this.state}
+				<JobsContainer
 					uid={this.props.uid}
+					filters={filters}
+					jobs={jobs}
 				/>
-				{this.state.isCreatingNewJob && 
+				{/*{isCreatingNewJob && 
 					<NewJobContainer 
 						uid={this.props.uid}
 					/>
 				}*/}
 				<Footer
-					jobs={this.state.jobs}
-					filters={this.state.filters}
+					jobs={jobs}
+					filters={filters}
 				/>
 			</div>
 		);

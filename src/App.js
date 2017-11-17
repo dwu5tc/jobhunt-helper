@@ -43,15 +43,13 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="App">
+			<div className='app'>
 				{(this.state.uid)
-					?
-					<Home 
-						{...this.state}
+					? <Home 
+						{...this.state} // maybe only need uid not name
 						handleLogout={this.userLogout} 
 					/>
-					:
-					<Login 
+					: <Login 
 						handleLogin={this.userLogin} 
 					/>
 				}

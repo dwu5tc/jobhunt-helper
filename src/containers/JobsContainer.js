@@ -1,21 +1,34 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import JobContainer from './JobContainer';
+
 export default class JobsContainer extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
+
 	}
 
 	render() {
+		const visibleJobs = this.props.jobs.filter(job => this.props.filters.indexOf(job.appState) !== -1);
+		// add an actual index
 		return (
-			<p>hi from jobs container</p> 
-			// <Jobs />
+			<section className="jobs">
+				{visibleJobs.map((job, index) => {
+					return (
+						<JobContainer key={index} 
+							job={job}
+							uid={this.props.uid}
+						/>
+					);
+				})}
+			</section>
 		);
 	}
 }
 
 JobsContainer.propTypes = {
 	uid: PropTypes.string.isRequired,
-	filter: PropTypes.string.isRequired,
-	jobs: PropTpyes.array.isRequired,
+	filters: PropTypes.array.isRequired,
+	jobs: PropTypes.array.isRequired,
 };
