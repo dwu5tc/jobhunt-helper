@@ -13,7 +13,7 @@ export default class Home extends Component {
 		super(props);
 
 		this.state = {
-			isCreatingNewJob: true,
+			isCreatingNewJob: false,
 			filters: ['applied', 'ongoing', 'yellow rejection', 'red rejection'],
 			jobs: [
 				{
@@ -130,6 +130,12 @@ export default class Home extends Component {
 		}
 	}
 
+	toggleCreateNewJob = () => {
+		this.setState((prevState) => ({
+			isCreatingNewJob: !prevState.isCreatingNewJob
+		}));
+	}
+
 	render() {
 		const {
 			isCreatingNewJob,
@@ -158,8 +164,14 @@ export default class Home extends Component {
 				{isCreatingNewJob && 
 					<NewJobContainer 
 						uid={this.props.uid}
+						toggleCreate={this.toggleCreateNewJob}
 					/>
 				}
+				<button 
+					onClick={this.toggleCreateNewJob}
+				>
+					+ Job
+				</button>
 				<Footer
 					jobs={jobs}
 					filters={filters}

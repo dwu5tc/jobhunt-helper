@@ -13,7 +13,7 @@ export default class NewJobContainer extends Component {
 		this.state = this.initialState();
 	}
 
-	initialState = () => {
+	initialState = () => ({
 		title: '',
 		company: '',
 		link: '',
@@ -23,20 +23,21 @@ export default class NewJobContainer extends Component {
 		comments: '',
 		appState: 'applied',
 		interviews: []
-	}
+	})
 
 	onSubmit = (e) => {
 		e.preventDefault();
 		console.log('submitting!!!');
 		const initialState = this.initialState();
-		this.setState({
-			{...initialState} // obj spread
-		});
+		// this.setState({
+		// 	{...initialState} // obj spread
+		// });
 	}
 
 	onChange = (e) => {
+		console.log(e, e.target.name, e.target.value)
 		this.setState({
-			e.target.name = e.target.value
+			[e.target.name]: e.target.value
 		});
 	}
 
@@ -45,12 +46,14 @@ export default class NewJobContainer extends Component {
 			<NewJob 
 				uid={this.props.uid}
 				handleChange={this.onChange}
-				handleSubmit={this.handleChange}
+				handleSubmit={this.onSubmit}
+				toggleCreate={this.props.toggleCreate}
 			/>
 		);
 	}
 }
 
 NewJobContainer.propTypes = {
-	uid: PropTypes.string.isRequired
+	uid: PropTypes.string.isRequired,
+	toggleCreate: PropTypes.func.isRequired
 };

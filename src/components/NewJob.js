@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 const NewJob = (props) => {
 	return (
-		<form onSubmit={props.handleSubmit}>
+		<form onSubmit={props.handleSubmit} className='new-job'>
 			<label>
 				Title:
 				<input 
 					name='title'
 					type='text'
-					onChange={this.handleChange}
+					onChange={props.handleChange}
 					value={props.title}
 				/>
 			</label>
@@ -18,7 +18,7 @@ const NewJob = (props) => {
 				<input 
 					name='company'
 					type='text'
-					onChange={this.handleChange}
+					onChange={props.handleChange}
 					value={props.company}
 				/>
 			</label>
@@ -27,7 +27,7 @@ const NewJob = (props) => {
 				<input 
 					name='link'
 					type='text'
-					onChange={this.handleChange}
+					onChange={props.handleChange}
 					value={props.link}
 				/>
 			</label>
@@ -36,7 +36,7 @@ const NewJob = (props) => {
 				<input 
 					name='contact'
 					type='text'
-					onChange={this.handleChange}
+					onChange={props.handleChange}
 					value={props.contact}
 				/>
 			</label>
@@ -45,7 +45,7 @@ const NewJob = (props) => {
 				<input 
 					name='contactEmail'
 					type='text'
-					onChange={this.handleChange}
+					onChange={props.handleChange}
 					value={props.contactEmail}
 				/>
 			</label>
@@ -54,23 +54,29 @@ const NewJob = (props) => {
 				<input 
 					name='contactPosition'
 					type='text'
-					onChange={this.handleChange}
+					onChange={props.handleChange}
 					value={props.contactPosition}
 				/>
 			</label>
 			<label>
 				Comments:
 				<textarea
-					onChange={this.handleChange}
+					name='comments'
+					onChange={props.handleChange}
 					value={props.comments}
 				/>
 			</label>
-			<button>Applied</button>
-			<button>Ongoing</button>
-			<button>Yellow Rejection</button>
-			<button>Red Rejection</button>
+			<div className="new-job__state-select">
+				<button>Applied</button>
+				<button>Ongoing</button>
+				<button>Yellow Rejection</button>
+				<button>Red Rejection</button>
+			</div>
 			<button>+ Interview</button>
-			<input type="submit" value 'submit' />
+			<div className="new-job__nav">
+				<button onClick={props.toggleCreate}>Cancel</button>
+				<input type="submit" value='Submit' />
+			</div>
 		</form>
 	);
 };
@@ -78,7 +84,8 @@ const NewJob = (props) => {
 NewJob.propTypes = {
 	uid: PropTypes.string.isRequired,
 	handleChange: PropTypes.func.isRequired,
-	handleSubmit: PropTypes.func.isRequired
+	handleSubmit: PropTypes.func.isRequired,
+	toggleCreate: PropTypes.func.isRequired
 }
 
 export default NewJob;
